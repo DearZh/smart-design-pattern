@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 定义单例对象
@@ -22,10 +24,13 @@ public class Singleton {
     private Singleton() {
     }
 
+    static Lock lock = new ReentrantLock();
+
     /**
      * @description: 实例化类
      */
     public static Singleton getInstance() {
+        //使用synchronized或者lock都可以，关于Synchronized https://blog.csdn.net/javazejian/article/details/72828483?locationNum=5&fps=1
         synchronized (Singleton.class) {
             if (singleton == null) {
                 System.out.println("new Singleton()：" + Thread.currentThread());
