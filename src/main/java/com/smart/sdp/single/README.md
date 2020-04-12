@@ -20,7 +20,8 @@
 
 5、Collections.synchronizedSet() 用来获取一个线程安全的Set集合
 
-## 可参考链接
+-----
+
 [关于线程池的参数含义](https://www.jianshu.com/p/f030aa5d7a28)
 
 [synchronize](https://blog.csdn.net/javazejian/article/details/72828483?locationNum=5&fps=1)
