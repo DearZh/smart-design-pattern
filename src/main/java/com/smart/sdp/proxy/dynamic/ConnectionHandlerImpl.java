@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
+ * JDK动态代理
  * @author Arnold.zhao <a href="mailto:Arnold_zhao@126.com"/>
  * @create 2020-03-15
  */

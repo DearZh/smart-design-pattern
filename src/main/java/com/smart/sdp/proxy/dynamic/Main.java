@@ -19,6 +19,7 @@ public class Main {
 
         //调用当前被代理类的方法
         connectionProxy.openConnection();
+        connectionProxy.closeConnection();
         System.out.println(connectionProxy.executeSql("select * from "));
     }
 }

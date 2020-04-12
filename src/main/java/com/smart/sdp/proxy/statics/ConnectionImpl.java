@@ -15,7 +15,7 @@ public class ConnectionImpl implements Connection {
     }
 
     @Override
-    public void closeConnection() {
+    public final void closeConnection() {
         //TODO
         System.out.println("链接已关闭");
     }

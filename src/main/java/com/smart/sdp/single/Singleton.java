@@ -37,6 +37,18 @@ public class Singleton {
                 singleton = new Singleton();
             }
         }
+
+
+        //双检锁，double check locking ，相比于上面的判断方式性能上更好一些
+        /*if (singleton == null) {
+            synchronized (Singleton.class) {
+                if (singleton == null) {
+                    System.out.println("new Singleton()：" + Thread.currentThread());
+                    singleton = new Singleton();
+                }
+            }
+        }*/
+
         return singleton;
     }
 

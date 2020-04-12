@@ -1,4 +1,7 @@
 package com.smart.sdp;
+
+import javafx.beans.binding.IntegerExpression;
+
 /*
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,4 +13,8 @@ public class SmartDesignPatternApplication {
         SpringApplication.run(SmartDesignPatternApplication.class, args);
     }
 */
+
+    public static void main(String[] args) {
+
+    }
 }
