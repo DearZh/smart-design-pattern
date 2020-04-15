@@ -1,0 +1,56 @@
+# 装饰器模式
+装饰器模式与适配器模式统称为包装模式（Wrapper）
+
+>适配器模式的主要目的是为了将当前类重新适配一个新的接口，使其具备新的接口的能力；
+我们在适配器的例子中通过适配器类的继承，使其当前类具备了新的接口的能力,比如我们的ObserverMobileOPPO类；
+而通过组合的方式使其当前类在不改变源代码的情况下具备了新的对象能力，比如我们的ListObserverMobileOPPO类，
+通过将ArrayList设置为属性的方式，为ListObserverMobileOPPO类扩展了新的功能；
+
+而装饰器模式则有所不同，装饰器模式的特点是：
+>1、不改变原类文件 2、不使用继承 3、动态扩展
+ 
+ 通过适配器的特点来比对装饰器的特点可以发现：
+ 
+ 1、不改变原类文件，进行动态的方法扩展，适配器模式也是可以实现的
+ 
+ 2、不适用继承：通过适配器的组合模式也是可以实现的
+ 
+ 3、动态扩展：适配器模式的类继承和组合方式都可以实现动态扩展；
+ 
+ 所以基于如上特点，本人此处更偏向于将装饰器模式理解为适配器组合模式的一种升级；不过不同的是，我们原有的通过定义类属性来实现功能组合的方式较为粗糙和简单，不宜扩展；
+ 
+比如：我们在适配器的组合模式中为了将ObserverMobileOPPO类具备List的功能，
+新建了ListObserverMobileOPPO类，并定义了ArrayList()对象作为其类的属性，使其当前类具备了直接使用ArrayList的能力；
+但是如果我们此处需要再给ObserverMobileOPPO类添加一个Map记录key,value的功能，应该怎么做呢？
+良好的做法则是重写一个MapObserverMobileOPPO类然后继承ObserverMobileOPPO并增加Map map = new HashMap()的私有属性，以此来扩展ObserverMobileOPPO类使其具备使用Map的能力，
+那么再接着往下看，如果我们需要再给当前ObserverMobileOPPO增加一个无序集合的能力呢？如何扩展？是的，重写一个SetObserverMobileOPPO类来使其具备Set的对象能力；
+
+以上，我们每次给当前类扩展新的功能时，都是重写一个新类并继承了ObserverMobileOPPO类，那么我们有没有什么方式可以降低这三个新的子类与ObserverMobileOPPO类的耦合呢，
+或者说，我此时就是不想继承ObserverMobileOPPO类，但是我还想给ObserverMobileOPPO类扩展新的功能，如何操作？
+
+还是新增一个ListObserverMobileOPPO类,但此时不再继承ObserverMobileOPPO，改为将ObserverMobileOPPO作为一个属性进行实例化；
+
+**这样我们已经实现了无继承，所以，我们现在已经是一个装饰器模式了，不开玩笑，yeah，现在的确已经就是一个装饰器模式了,不过还很粗糙；**
+
+因为我们每次需要装饰该ObserverMobileOPPO目标类时，都需要重新写一个新的类并且将ObserverMobileOPPO类当做属性注入，
+比如：ListObserverMobileOPPO中需要定义待扩展的ObserverMobileOPPO目标类，然后MapObserverMobileOPPO类中也需要将目标类定义为属性
+以此类推，我们的装饰器越来越多，那么当前该目标类就需要越来越多的被引用，所以最简单的方式就是抽象出该目标类；
+
+此时我们再新建一个MobileOppoDecorator（统一的Oppo装饰器父类），将待装饰的ObserverMobileOPPO类直接定义为当前父类的属性，
+然后将ListObserverMobileOPPO等装饰器直接继承该MobileOppoDecorator父类后便可直接进行新增方法的扩展，
+而无需再每一个装饰器类上都定义一个ObserverMobileOPPO属性了；
+此时装饰器结束；详情可见代码；
+
+
+# 总结
+装饰器模式可以看做是适配器模式组合方式的升级版，但适配器模式的类继承方式，则还是保持着独一无二的特殊性，当你需要将现有的类适配新的接口时
+，适配器继承模式还是依然存有效果；所以，我们应该是把装饰器模式看做是适配器组合方式的升级版呢？还是应该
+把适配器组合方式当做是装饰器模式的其中一种呢？世界很神奇，OOP也是；但无论模式如何变换最终的OOP思想还是不变的，模式皆是套路，思想才是本质；
+
+最后：
+
+当你的类需要适配新的接口时，采用适配器的类继承模式是最佳的选择，通过实现一个目标类的子类，然后将子类实现该对应接口的方式，使其保持及保持了父类的特性，也
+具备了新接口的特性；
+
+
+但是：当你只是需要对目标类进行包装扩展方法时，则装饰器模式便是最佳的选择，通过将目标类作为新的类的属性而存在的方式，以此进行类的动态扩展；
